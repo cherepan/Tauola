@@ -40,9 +40,13 @@ cd external/
 mkdir  TAUOLA MC-TESTER LHAPDF HEPMC PYTHIA
 
 cd TAUOLA/
-wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.1.1.6b/TAUOLA.1.1.6b.tar.gz
-tar -xvzf TAUOLA.1.1.6b.tar.gz
-rm TAUOLA.1.1.6b.tar.gz
+#wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.1.1.6b/TAUOLA.1.1.6b.tar.gz
+#tar -xvzf TAUOLA.1.1.6b.tar.gz
+#rm TAUOLA.1.1.6b.tar.gz
+
+wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.development.version/TAUOLA.development.version-LHC.tar.gz
+tar -xvfz TAUOLA.development.version-LHC.tar.gz
+
 #mv ../../TAUOLA .
 cd ../MC-TESTER/
 wget https://mc-tester.web.cern.ch/MC-TESTER/MC-TESTER-1.25.0.tar.gz
