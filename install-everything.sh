@@ -39,13 +39,27 @@ mkdir external
 cd external/
 mkdir  TAUOLA MC-TESTER LHAPDF HEPMC PYTHIA
 
+git clone https://gitlab.cern.ch/hepmc/HepMC3.git
+mkdir hepmc3-build
+cd hepmc3-build
+/cvmfs/cms.cern.ch/slc6_amd64_gcc700/external/cmake/3.9.0/bin/cmake -DHEPMC3_ENABLE_ROOTIO=OFF -DHEPMC3_ENABLE_PYTHON=OFF  -DCMAKE_INSTALL_PREFIX=../hepmc3-install ../HepMC3 
+make install
+cd ../
+
 cd TAUOLA/
 #wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.1.1.6b/TAUOLA.1.1.6b.tar.gz
 #tar -xvzf TAUOLA.1.1.6b.tar.gz
 #rm TAUOLA.1.1.6b.tar.gz
 
-wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.development.version/TAUOLA.development.version-LHC.tar.gz
-tar -xvfz TAUOLA.development.version-LHC.tar.gz
+#wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.development.version/TAUOLA.development.version-LHC.tar.gz
+#tar -xvfz TAUOLA.development.version-LHC.tar.gz
+
+wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.1.1.8/TAUOLA.1.1.8.tar.gz
+tar -xvzf TAUOLA.1.1.8.tar.gz
+
+
+
+
 
 #mv ../../TAUOLA .
 cd ../MC-TESTER/
@@ -104,7 +118,10 @@ cd ../lhapdf/share/lhapdf/
 # Build/make TAUOLA TauSpinner, TauSpinner examples build must be done after Tauola/TauSpinner build.
 #
 cd ../../../../TAUOLA/TAUOLA/
-./configure --with-tau-spinner --with-lhapdf=`pwd`/../../LHAPDF/lhapdf --with-mc-tester=`pwd`/../../MC-TESTER/MC-TESTER --with-hepmc=`pwd`/../../HEPMC/HepMC --with-pythia8=`pwd`/../../PYTHIA/pythia8201
+#./configure --with-tau-spinner --with-lhapdf=`pwd`/../../LHAPDF/lhapdf --with-mc-tester=`pwd`/../../MC-TESTER/MC-TESTER --with-hepmc=`pwd`/../../HEPMC/HepMC --with-pythia8=`pwd`/../../PYTHIA/pythia8201
+./configure --with-tau-spinner --with-lhapdf=`pwd`/../../LHAPDF/lhapdf --with-mc-tester=`pwd`/../../MC-TESTER/MC-TESTER --with-hepmc3=`pwd`/../../hepmc3-install --with-pythia8=`pwd`/../../PYTHIA/pythia8201 --with-hepmc=`pwd`/../../HEPMC/HepMC
+
+
 # NOTE, you may need PYTHIA8DATA= for older versions of Pythia
 make
 source configure.paths.sh
