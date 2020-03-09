@@ -144,3 +144,4 @@ make
 # cd myAnalysis
 # make
 
+#wget http://www.hepforge.org/archive/lhapdf/pdfsets/5.9.1/MSTW2008nnlo90cl.LHgrid
