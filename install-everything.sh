@@ -39,41 +39,44 @@ mkdir external
 cd external/
 mkdir  TAUOLA MC-TESTER LHAPDF HEPMC PYTHIA
 
-git clone https://gitlab.cern.ch/hepmc/HepMC3.git
-mkdir hepmc3-build
-cd hepmc3-build
-/cvmfs/cms.cern.ch/slc6_amd64_gcc700/external/cmake/3.9.0/bin/cmake -DHEPMC3_ENABLE_ROOTIO=OFF -DHEPMC3_ENABLE_PYTHON=OFF  -DCMAKE_INSTALL_PREFIX=../hepmc3-install ../HepMC3 
-make install
-cd ../
+#git clone https://gitlab.cern.ch/hepmc/HepMC3.git
+#mkdir hepmc3-build
+#cd hepmc3-build
+#/cvmfs/cms.cern.ch/slc6_amd64_gcc700/external/cmake/3.9.0/bin/cmake -DHEPMC3_ENABLE_ROOTIO=OFF -DHEPMC3_ENABLE_PYTHON=OFF  -DCMAKE_INSTALL_PREFIX=../hepmc3-install ../HepMC3 
+#make install
+#cd ../
 
 cd TAUOLA/
 #wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.1.1.6b/TAUOLA.1.1.6b.tar.gz
 #tar -xvzf TAUOLA.1.1.6b.tar.gz
 #rm TAUOLA.1.1.6b.tar.gz
 
-#wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.development.version/TAUOLA.development.version-LHC.tar.gz
-#tar -xvfz TAUOLA.development.version-LHC.tar.gz
+wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.development.version/TAUOLA.development.version.tar.gz
+tar -xvf TAUOLA.development.version.tar.gz
 
-wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.1.1.8/TAUOLA.1.1.8.tar.gz
-tar -xvzf TAUOLA.1.1.8.tar.gz
+#case 
+#wget https://tauolapp.web.cern.ch/tauolapp/resources/TAUOLA.1.1.8/TAUOLA.1.1.8.tar.gz
+#tar -xvzf TAUOLA.1.1.8.tar.gz
 
 
 
 
 
 #mv ../../TAUOLA .
-cd ../MC-TESTER/
-wget https://mc-tester.web.cern.ch/MC-TESTER/MC-TESTER-1.25.0.tar.gz
-tar -xvzf MC-TESTER-1.25.0.tar.gz
-rm MC-TESTER-1.25.0.tar.gz
+#cd ../MC-TESTER/
+#wget https://mc-tester.web.cern.ch/MC-TESTER/MC-TESTER-1.25.0.tar.gz
+#tar -xvzf MC-TESTER-1.25.0.tar.gz
+#rm MC-TESTER-1.25.0.tar.gz
 cd ../HEPMC/
-wget http://lcgapp.cern.ch/project/simu/HepMC/download/HepMC-2.06.09.tar.gz
-tar -xvzf HepMC-2.06.09.tar.gz
-rm HepMC-2.06.09.tar.gz
+cp -r /afs/cern.ch/work/c/cherepan/Tauola/Tauola/118/external/HEPMC/HepMC-2.06.09 .
+#wget http://lcgapp.cern.ch/project/simu/HepMC/download/HepMC-2.06.09.tar.gz
+#tar -xvzf HepMC-2.06.09.tar.gz
+#rm HepMC-2.06.09.tar.gz
 cd ../LHAPDF/
-wget http://www.hepforge.org/archive/lhapdf/lhapdf-5.9.1.tar.gz
-tar -xvzf lhapdf-5.9.1.tar.gz
-rm lhapdf-5.9.1.tar.gz
+#wget http://www.hepforge.org/archive/lhapdf/lhapdf-5.9.1.tar.gz
+#tar -xvf lhapdf-5.9.1.tar.gz
+#rm lhapdf-5.9.1.tar.gz
+cp -r /afs/cern.ch/work/c/cherepan/Tauola/Tauola/external/LHAPDF/lhapdf-5.9.1 .
 cd ../PYTHIA/
 wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8201.tgz
 tar -xvzf pythia8201.tgz
@@ -100,9 +103,9 @@ make install -j4
 #
 # Build MC-TESTER
 #
-cd ../../MC-TESTER/MC-TESTER/
-./configure --with-HepMC=`pwd`/../../HEPMC/HepMC
-make -j4
+#cd ../../MC-TESTER/MC-TESTER/
+#./configure --with-HepMC=`pwd`/../../hepmc3-install
+#make -j4
 
 #
 # Build LHAPDF
@@ -119,7 +122,13 @@ cd ../lhapdf/share/lhapdf/
 #
 cd ../../../../TAUOLA/TAUOLA/
 #./configure --with-tau-spinner --with-lhapdf=`pwd`/../../LHAPDF/lhapdf --with-mc-tester=`pwd`/../../MC-TESTER/MC-TESTER --with-hepmc=`pwd`/../../HEPMC/HepMC --with-pythia8=`pwd`/../../PYTHIA/pythia8201
-./configure --with-tau-spinner --with-lhapdf=`pwd`/../../LHAPDF/lhapdf --with-mc-tester=`pwd`/../../MC-TESTER/MC-TESTER --with-hepmc3=`pwd`/../../hepmc3-install --with-pythia8=`pwd`/../../PYTHIA/pythia8201 --with-hepmc=`pwd`/../../HEPMC/HepMC
+
+
+#./configure --with-tau-spinner --with-lhapdf=`pwd`/../../LHAPDF/lhapdf --with-mc-tester=`pwd`/../../MC-TESTER/MC-TESTER --with-hepmc3=`pwd`/../../hepmc3-install --with-pythia8=`pwd`/../../PYTHIA/pythia8201 --with-hepmc=`pwd`/../../HEPMC/HepMC
+
+
+./configure --with-tau-spinner --with-lhapdf=`pwd`/../../LHAPDF/lhapdf  --without-hepmc3 --with-pythia8=`pwd`/../../PYTHIA/pythia8201  --with-hepmc=`pwd`/../../HEPMC/HepMC
+#./configure --with-tau-spinner --with-lhapdf=`pwd`/../../LHAPDF/lhapdf  --with-hepmc3=`pwd`/../../hepmc3-install --with-pythia8=`pwd`/../../PYTHIA/pythia8201 --without-hepmc
 
 
 # NOTE, you may need PYTHIA8DATA= for older versions of Pythia
@@ -127,10 +136,11 @@ make
 source configure.paths.sh
 
 cd TauSpinner/examples/
-./configure --with-mc-tester=$MCTESTERLOCATION --with-hepmc=$HEPMCLOCATION
+#./configure --with-mc-tester=$MCTESTERLOCATION --with-hepmc=$HEPMCLOCATION
+./configure --with-hepmc=$HEPMCLOCATION
 
-make
-./tau-reweight-test.exe
+#make
+#./tau-reweight-test.exe
 
 ######
 # 3  # Build and run of user analysis program sequence may look as follows
